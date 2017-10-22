@@ -25,7 +25,7 @@ export class ConsoleComponent {
   }
   sender(text): void {
     this.channel.post('http://phoenix.spotlife.ru/spikard/',
-      new InnerRequest().withBody(text).toString(), {responseType: 'text'})
-      .subscribe(answer => this.canvas += new InnerRequest().fromString(answer).getB() + '>');
+      InnerRequest.withBody(text).toString(), {responseType: 'text'})
+      .subscribe(answer => this.canvas += InnerRequest.fromString(answer).getB() + '>');
   }
 }
