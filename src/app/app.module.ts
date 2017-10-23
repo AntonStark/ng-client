@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { ConsoleComponent } from './console/console.component';
 import { FormulasComponent } from './formulas/formulas.component';
 import { CookieService } from './cookie.service';
+import { FormulaComponent } from './formulas/formula/formula.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConsoleComponent,
-    FormulasComponent
+    FormulasComponent,
+    FormulaComponent
   ],
   imports: [
     BrowserModule,
