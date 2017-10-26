@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
-import { InnerRequest } from '../inner-request';
+import {DataPacket} from '../data-packet';
+import {CookieService} from '../cookie.service';
+import {DataEntry} from '../data-entry';
 
 @Component({
   selector: 'app-console',
@@ -25,7 +27,10 @@ export class ConsoleComponent {
   }
   sender(text): void {
     this.channel.post('http://phoenix.spotlife.ru/spikard/',
-      InnerRequest.withBody(text).toString(), {responseType: 'text'})
-      .subscribe(answer => this.canvas += InnerRequest.fromString(answer).getB() + '>');
+      JSON.stringify(
+        new DataPacket({
+          'user-id': CookieService.get('user-id')
+        }, [DataEntry.ofText(text)])))
+      .subscribe(answer => this.canvas += answer.toString() + '\n>');
   }
 }

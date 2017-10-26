@@ -4,14 +4,12 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { ConsoleComponent } from './console/console.component';
-import { FormulasComponent } from './formulas/formulas.component';
 import { CookieService } from './cookie.service';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConsoleComponent,
-    FormulasComponent
   ],
   imports: [
     BrowserModule,
