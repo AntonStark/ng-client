@@ -1,15 +1,11 @@
 import {InfoType} from './info-type.enum';
 
 export class DataEntry {
-  private type: InfoType;
-  private mess: string;
+  readonly type: InfoType;
+  readonly mess: any;
 
-  constructor(_type: InfoType, _mess: string) {
+  constructor(_type: InfoType, _mess: any) {
     this.type = _type;
     this.mess = _mess;
-  }
-
-  static ofText(data: string): DataEntry {
-    return new DataEntry(InfoType.Text, data);
   }
 }

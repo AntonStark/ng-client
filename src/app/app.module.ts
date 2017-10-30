@@ -5,6 +5,7 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { ConsoleComponent } from './console/console.component';
 import { CookieService } from './cookie.service';
+import { ChannelService } from './channel.service';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,10 @@ import { CookieService } from './cookie.service';
     BrowserModule,
     HttpClientModule
   ],
-  providers: [CookieService],
+  providers: [
+    CookieService,
+    ChannelService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

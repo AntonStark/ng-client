@@ -1,19 +1,28 @@
-import { Component } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 
-import {DataPacket} from '../data-packet';
-import {CookieService} from '../cookie.service';
-import {DataEntry} from '../data-entry';
+import { InfoType } from '../info-type.enum';
+import { ChannelService } from '../channel.service';
 
 @Component({
   selector: 'app-console',
   templateUrl: './console.component.html',
   styleUrls: ['./console.component.css']
 })
-export class ConsoleComponent {
-  canvas: string;
-  constructor (private channel: HttpClient) {
+export class ConsoleComponent implements OnInit {
+  private canvas: string;
+
+  constructor (private channel: ChannelService) {
     this.canvas = '>';
+  }
+
+  async infoHandler(info: string) {
+    this.canvas += info + '\n>';
+  }
+
+  ngOnInit() {
+    this.channel
+      .registerHandler(InfoType.Text,
+        this.infoHandler.bind(this));
   }
 
   takeLastLine(): string {
@@ -22,15 +31,7 @@ export class ConsoleComponent {
   onKeyUp(e): boolean {
     this.canvas = e.target.value;
     if (e.keyCode === 13)
-      this.sender(this.takeLastLine());
+      this.channel.send(InfoType.Text, this.takeLastLine());
     return true;
-  }
-  sender(text): void {
-    this.channel.post('http://phoenix.spotlife.ru/spikard/',
-      JSON.stringify(
-        new DataPacket({
-          'user-id': CookieService.get('user-id')
-        }, [DataEntry.ofText(text)])))
-      .subscribe(answer => this.canvas += answer.toString() + '\n>');
   }
 }

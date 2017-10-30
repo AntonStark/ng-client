@@ -1,8 +1,8 @@
 import {DataEntry} from './data-entry';
 
 export class DataPacket {
-  private meta: object;
-  private data: DataEntry[];
+  readonly meta: object;
+  readonly data: DataEntry[];
 
   constructor(_meta: object, _data: DataEntry[]) {
     this.meta = _meta;
