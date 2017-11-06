@@ -1,0 +1,23 @@
+a
+{
+  padding: 5px 5px;
+  display: inline-block;
+}
+.selected
+{
+  border: solid 1px black;
+}
+a:not(.selected):hover
+{
+  border-bottom: 1px solid black;
+}
+
+p
+{
+  margin: 8px 5px;
+  text-align: right;
+}
+input
+{
+  width: 100px;
+}

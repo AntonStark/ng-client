@@ -8,21 +8,29 @@ import { CookieService } from './cookie.service';
 import { ChannelService } from './channel.service';
 import { FormulaComponent } from './formulas/formula/formula.component';
 import { FormulasComponent } from './formulas/formulas.component';
+import { LoginComponent } from './login/login.component';
+import { SignInComponent } from './login/sign-in/sign-in.component';
+import { SignUpComponent } from './login/sign-up/sign-up.component';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     ConsoleComponent,
     FormulasComponent,
-    FormulaComponent
+    FormulaComponent,
+    LoginComponent,
+    SignInComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   providers: [
     CookieService,
-    ChannelService
+    ChannelService,
   ],
   bootstrap: [AppComponent]
 })

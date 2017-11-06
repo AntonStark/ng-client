@@ -1,0 +1,17 @@
+<form [formGroup]="signUpForm" (ngSubmit)="signUp()">
+  <p>
+    <label>Логин:</label>
+    <input type="text" formControlName="login">
+  </p>
+  <p>
+    <label>Пароль:</label>
+    <input type="password" formControlName="password">
+  </p>
+  <p>
+    <label>Повтор:</label>
+    <input type="password" formControlName="retry">
+  </p>
+  <p>
+    <button type="submit" [disabled]="!signUpForm.valid">Регистрация</button>
+  </p>
+</form>
