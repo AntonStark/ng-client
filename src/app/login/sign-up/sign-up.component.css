@@ -1,0 +1,23 @@
+/*логин живёт по своим законам*/
+#login .ng-valid.ng-touched,
+#login .ng-valid.ng-dirty {
+  border-color: green;
+}
+#login .ng-invalid.ng-touched,
+#login .ng-invalid.ng-dirty {
+  border-color: red;
+}
+#login .ng-pending {
+  border-color: yellow;
+}
+
+/*группа паролей и сам input valid-ны*/
+.passwords.ng-valid input.ng-valid.ng-touched {
+  border-color: green;
+}
+/*в остальных трёх случаях invalid-ны*/
+.passwords.ng-valid input.ng-invalid.ng-touched,
+.passwords.ng-invalid input.ng-valid.ng-touched,
+.passwords.ng-invalid input.ng-invalid.ng-touched {
+  border-color: red;
+}

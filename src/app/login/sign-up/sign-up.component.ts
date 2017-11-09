@@ -1,38 +1,57 @@
-import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+import { Component, Input, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
+
+import { ChannelService } from '../../channel.service';
+import { InfoType } from '../../info-type.enum';
+import { loginFree, passwordsMatch } from './validators';
 
 @Component({
   selector: 'app-sign-up',
   templateUrl: './sign-up.component.html',
-  styleUrls: ['./../login.component.css']
+  styleUrls: ['./sign-up.component.css', './../login.component.css'],
 })
-export class SignUpComponent {
-  signUpForm: FormGroup;
+export class SignUpComponent implements OnInit {
+  form: FormGroup;
+  @Input() login: string;
 
-  defaultValidators: Validators[] = [
+  defaultValidators: ValidatorFn[] = [
     Validators.required,
     Validators.minLength(5),
     Validators.maxLength(64)
   ];
-  passwordsMatch(): ValidatorFn {
-    return (group: AbstractControl): {[key: string]: any} => {
-      const password = group.get('password');
-      const retry = group.get('retry');
-      const valid = (password.value === retry.value);
-      return (valid ? null : {'passwordMismatch': {}});
-    };
+
+  constructor(private fb: FormBuilder, private channel: ChannelService) {
+    this.form = fb.group({
+      login: ['', this.defaultValidators, loginFree(channel)],
+      passwords: fb.group({
+        password: ['', this.defaultValidators],
+        retry:    ['', this.defaultValidators]
+      }, {validator: passwordsMatch()})
+    });
   }
 
-  constructor(private fb: FormBuilder) {
-    this.signUpForm = fb.group({
-      login: ['', this.defaultValidators],
-      password: ['', this.defaultValidators],
-      retry: ['', this.defaultValidators]
-    }, {validator: this.passwordsMatch});
+  passwordsGroupHasError(): boolean {
+    const passwords = this.form.get('passwords');
+    const password = this.form.get('passwords').get('password');
+    const retry = this.form.get('passwords').get('retry');
+    const passwordDone = (password.dirty || password.touched);
+    const retryDone = (retry.dirty || retry.touched);
+    return (passwords.invalid && passwordDone && retryDone);
   }
 
-  signUp(): void {
-    console.log('signUp happen');
+  signUp(form: FormGroup): void {
+    this.channel.send(InfoType.Text,
+      'logIn 1 ' +
+      form.value.login + ' ' +
+      form.value.passwords.password);
+  }
+
+  ngOnInit() {
+    this.form.patchValue({
+      'login': this.login
+    });
+    if (this.login.length)
+      this.form.controls.login.markAsTouched();
   }
 
 }

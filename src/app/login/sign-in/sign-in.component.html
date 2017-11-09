@@ -1,4 +1,4 @@
-<form [formGroup]="signInForm" (ngSubmit)="signIn()">
+<form [formGroup]="form" (ngSubmit)="signIn(form)">
   <p>
     <label>Логин:</label>
     <input type="text" formControlName="login">
@@ -8,6 +8,6 @@
     <input type="password" formControlName="password">
   </p>
   <p>
-    <button type="submit" [disabled]="!signInForm.valid">Вход</button>
+    <button type="submit" [disabled]="!form.valid">Вход</button>
   </p>
 </form>

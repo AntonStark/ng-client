@@ -1,19 +1,23 @@
 <section [ngSwitch]="hasAuth">
   <div *ngSwitchCase="false">
-    <a (click)="authMode='sign-in'"
+    <a (click)="toSignIn()"
        [class.selected]="authMode === 'sign-in'">Вход</a>
-    <a (click)="authMode='sign-up'"
+    <a (click)="toSignUp()"
        [class.selected]="authMode === 'sign-up'">Регистрация</a>
-    <div [ngSwitch]="authMode">
+    <div [ngSwitch]="authMode"  (change)="serverError.is = false">
       <!--Форма входа-->
-      <app-sign-in *ngSwitchCase="'sign-in'"></app-sign-in>
+      <app-sign-in [login]="savedLogin" *ngSwitchCase="'sign-in'"></app-sign-in>
       <!--Форма регистрации-->
-      <app-sign-up *ngSwitchCase="'sign-up'"></app-sign-up>
+      <app-sign-up [login]="savedLogin" *ngSwitchCase="'sign-up'"></app-sign-up>
+    </div>
+    <div class="errors" *ngIf="serverError.is">
+      <p>
+        {{serverError.mess}}
+      </p>
     </div>
   </div>
   <div *ngSwitchCase="true">
-    <p>
-      login works for user info and out!
-    </p>
+    <p><label id="user">{{userName}}</label></p>
+    <p><button (click)="quit()">Выход</button></p>
   </div>
 </section>

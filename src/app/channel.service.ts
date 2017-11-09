@@ -53,4 +53,11 @@ export class ChannelService {
       .post<DataPacket>(this.url, JSON.stringify(req)).toPromise();
     this.process(response);
   }
+
+  ask(infoType: InfoType, data: any) {
+    const meta = {'user-id': this.getUserID()};
+    const req = new DataPacket(meta, [new DataEntry(infoType, data)]);
+    return this.channel
+      .post<DataPacket>(this.url, JSON.stringify(req)).toPromise();
+  }
 }

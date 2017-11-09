@@ -1,17 +1,32 @@
-<form [formGroup]="signUpForm" (ngSubmit)="signUp()">
-  <p>
+<form [formGroup]="form" (ngSubmit)="signUp(form)">
+  <p id="login">
     <label>Логин:</label>
     <input type="text" formControlName="login">
   </p>
+  <div class="passwords" formGroupName="passwords">
+    <p>
+      <label>Пароль:</label>
+      <input type="password" formControlName="password">
+    </p>
+    <p>
+      <label>Повтор:</label>
+      <input type="password" formControlName="retry">
+    </p>
+  </div>
   <p>
-    <label>Пароль:</label>
-    <input type="password" formControlName="password">
+    <button type="submit" [disabled]="!form.valid">Регистрация</button>
   </p>
-  <p>
-    <label>Повтор:</label>
-    <input type="password" formControlName="retry">
-  </p>
-  <p>
-    <button type="submit" [disabled]="!signUpForm.valid">Регистрация</button>
-  </p>
+  <div class="errors">
+    <p *ngIf="form.get('login').hasError('loginBusy')">
+      Логин занят.
+    </p>
+    <div *ngIf="passwordsGroupHasError()">
+      <p *ngIf="form.get('passwords').hasError('passwordMismatch')">
+        Пароли не совпадают.
+      </p>
+      <p *ngIf="form.get('passwords').get('password').hasError('minlength')">
+        Пароль <5 символов.
+      </p>
+    </div>
+  </div>
 </form>
