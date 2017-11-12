@@ -10,6 +10,7 @@ import { InfoType } from '../info-type.enum';
   styleUrls: ['./formulas.component.css']
 })
 export class FormulasComponent implements OnInit {
+  displayRendered = false;
   fInfoStorage: FormulaInfo[];
   constructor(private channel: ChannelService) {
     this.fInfoStorage = [];
@@ -20,7 +21,6 @@ export class FormulasComponent implements OnInit {
     const formulaInfo = new FormulaInfo(mlObject.mlType,
       mlObject.label, mlObject.body, mlObject.premises);
     this.fInfoStorage.push(formulaInfo);
-    console.log(formulaInfo);
   }
 
   ngOnInit() {

@@ -9,7 +9,7 @@ import { ChannelService } from '../channel.service';
   styleUrls: ['./console.component.css']
 })
 export class ConsoleComponent implements OnInit {
-  private canvas: string;
+  public canvas: string;
 
   constructor (private channel: ChannelService) {
     this.canvas = '>';
