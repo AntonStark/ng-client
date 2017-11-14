@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { SignInComponent } from './login/sign-in/sign-in.component';
 import { SignUpComponent } from './login/sign-up/sign-up.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AddingPaneComponent } from './formulas/adding-pane/adding-pane.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     FormulaComponent,
     LoginComponent,
     SignInComponent,
-    SignUpComponent
+    SignUpComponent,
+    AddingPaneComponent
   ],
   imports: [
     BrowserModule,

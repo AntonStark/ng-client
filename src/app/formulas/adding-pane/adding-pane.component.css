@@ -1,0 +1,24 @@
+.pane * {
+  display: inline-block;
+}
+
+.button {
+  font-size: xx-large;
+  vertical-align: sub;
+  margin-right: 6px;
+}
+
+.init {
+  color: black;
+}
+.blur {
+  color: darkgrey;
+}
+
+input {
+  width: 75px;
+}
+
+.line {
+
+}
