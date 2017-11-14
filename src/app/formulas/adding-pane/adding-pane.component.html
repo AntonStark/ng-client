@@ -1,46 +1,44 @@
-<form class="pane" [formGroup]="main">
-  <div class="line" [ngSwitch]="viewState">
-    <div *ngSwitchCase="'initial'">
-      <a class="button init"
-         (click)="viewState = 'menu'">&#43;</a>
-    </div>
-    <div *ngSwitchCase="'menu'" formGroupName="initial">
-      <a class="button blur"
-         (click)="viewState = 'initial'">&#43;</a>
-      <button (click)="viewState='type'">тип</button>
-      <button (click)="viewState='variable'">переменная</button>
-      <button (click)="viewState='sym'">отображение</button>
-      <button (click)="viewState='axiom'">аксиома</button>
-    </div>
-    <div *ngSwitchCase="'type'" formGroupName="type">
-      <a class="button init"
-         (click)="addType()">&#9675;</a>
-      Объявить тип
-      <input type="text" formControlName="typeName" placeholder="имя типа">
-    </div>
-    <div *ngSwitchCase="'variable'" formGroupName="variable">
-      <a class="button init"
-         (click)="addVar()">&#9675;</a>
-      Ввести переменную
-      <input type="text" formControlName="varName" placeholder="имя переменной">
-      типа
-      <input type="text" formControlName="typeName" placeholder="тип переменной">
-    </div>
-    <div *ngSwitchCase="'sym'" formGroupName="sym">
-      <a class="button init"
-         (click)="addSym()">&#9675;</a>
-      Ввести отображение
-      <input type="text" formControlName="symName" placeholder="обозначение">
-      $\colon$
-      <input type="text" formControlName="arg1Type" placeholder="тип">
-      $\rightarrow$
-      <input type="text" formControlName="retType" placeholder="тип">
-    </div>
-    <div *ngSwitchCase="'axiom'" formGroupName="axiom">
-      <a class="button init"
-         (click)="addAxiom()">&#9675;</a>
-      Пусть
-      <input type="text" formControlName="axiom" placeholder="аксиома">
-    </div>
+<div class="pane" *ngIf="viewState === 'initial'">
+  <a (click)="viewState = 'menu'">&#x2B;</a>
+</div>
+<div class="pane" *ngIf="viewState !== 'initial'" [ngSwitch]="viewState">
+  <a (click)="viewState = 'initial'"
+     style="color: darkgray">&#9675;</a>
+
+  <div *ngSwitchCase="'menu'">
+    <button (click)="viewState='type'">тип</button>
+    <button (click)="viewState='variable'">переменная</button>
+    <button (click)="viewState='sym'">отображение</button>
+    <button (click)="viewState='axiom'">аксиома</button>
   </div>
-</form>
+
+  <form *ngSwitchCase="'type'" [formGroup]="type" (ngSubmit)="addType()">
+    Объявить тип
+    <input type="text" formControlName="typeName" placeholder="имя типа">
+    <a (click)="addType()" [class.dis]="!type.valid">&#x2B;</a>
+  </form>
+
+  <form *ngSwitchCase="'variable'" [formGroup]="variable" (ngSubmit)="addVar()">
+    Ввести переменную
+    <input type="text" formControlName="varName" placeholder="имя переменной">
+    типа
+    <input type="text" formControlName="typeName" placeholder="тип переменной">
+    <a (click)="addVar()" [class.dis]="!variable.valid">&#x2B;</a>
+  </form>
+
+  <form *ngSwitchCase="'sym'" [formGroup]="sym" (ngSubmit)="addSym()">
+    Ввести отображение
+    <input type="text" formControlName="symName" placeholder="обозначение">
+    &#58;
+    <input type="text" formControlName="arg1Type" placeholder="тип">
+    &#10230;
+    <input type="text" formControlName="retType" placeholder="тип">
+    <a (click)="addSym()" [class.dis]="!sym.valid">&#x2B;</a>
+  </form>
+
+  <form *ngSwitchCase="'axiom'" [formGroup]="axiom" (ngSubmit)="addAxiom()">
+    Пусть
+    <input type="text" formControlName="axiom" placeholder="аксиома">
+    <a (click)="addAxiom()" [class.dis]="!axiom.valid">&#x2B;</a>
+  </form>
+</div>
