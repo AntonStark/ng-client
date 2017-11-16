@@ -1,1 +1,20 @@
-<div>\[ {{info.body}} \]</div>
+<div [ngSwitch]="info.mlType">
+  <div *ngSwitchCase="'def_type'">
+    Объявлен тип ${{info.body}}$
+  </div>
+  <div *ngSwitchCase="'def_sym'">
+    Введено отображение ${{info.body}}$
+  </div>
+  <div *ngSwitchCase="'def_var'">
+    Переменная ${{info.body}}$
+  </div>
+  <div *ngSwitchCase="'axiom'">
+    \[
+    \text{{"{Пусть }"}} {{info.body}}
+    \tag{{'{'+info.label+'}'}}
+    \]
+  </div>
+  <div *ngSwitchDefault>
+    {{info.body}}
+  </div>
+</div>
