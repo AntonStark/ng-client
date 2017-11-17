@@ -35,6 +35,13 @@ export class AddingPaneComponent {
     });
   }
 
+  back(): void {
+    if (this.viewState === 'menu')
+      this.viewState = 'initial';
+    else
+      this.viewState = 'menu';
+  }
+
   addType(): void {
     this.channel.send(InfoType.Text,
       'add_type ' + this.type.get('typeName').value);

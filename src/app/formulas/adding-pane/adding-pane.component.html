@@ -2,7 +2,7 @@
   <a (click)="viewState = 'menu'">&#x2B;</a>
 </div>
 <div class="pane" *ngIf="viewState !== 'initial'" [ngSwitch]="viewState">
-  <a (click)="viewState = 'initial'"
+  <a (click)="back()"
      style="color: darkgray">&#9675;</a>
 
   <div *ngSwitchCase="'menu'">
