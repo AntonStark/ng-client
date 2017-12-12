@@ -23,7 +23,9 @@
     Ввести переменную
     <input type="text" formControlName="varName" placeholder="имя переменной">
     типа
-    <input type="text" formControlName="typeName" placeholder="тип переменной">
+    <select formControlName="typeName">
+      <option *ngFor="let t of mathTypes" [ngValue]="t">{{t}}</option>
+    </select>
     <a (click)="addVar()" [class.dis]="!variable.valid">&#x2B;</a>
     <button (click)="addVar()" type="submit" style="display:none">hidden submit</button>
   </form>
@@ -41,7 +43,7 @@
 
   <form *ngSwitchCase="'axiom'" [formGroup]="axiom" (ngSubmit)="addAxiom()">
     Пусть
-    <input type="text" formControlName="axiom" placeholder="аксиома">
+    <input type="text" formControlName="axiom" placeholder="аксиома" id="axiom">
     <a (click)="addAxiom()" [class.dis]="!axiom.valid">&#x2B;</a>
     <button (click)="addAxiom()" type="submit" style="display:none">hidden submit</button>
   </form>

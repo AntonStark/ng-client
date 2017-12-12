@@ -15,14 +15,20 @@ export class ConsoleComponent implements OnInit {
     this.canvas = '>';
   }
 
-  async infoHandler(info: string) {
+  async textHandler(info: string) {
     this.canvas += info + '\n>';
+  }
+  async errInfoHandler(info: string) {
+    this.canvas += 'Ошибка: ' + info + '\n>';
   }
 
   ngOnInit() {
     this.channel
       .registerHandler(InfoType.Text,
-        this.infoHandler.bind(this));
+        this.textHandler.bind(this));
+    this.channel
+      .registerHandler(InfoType.Error,
+        this.errInfoHandler.bind(this));
   }
 
   takeLastLine(): string {

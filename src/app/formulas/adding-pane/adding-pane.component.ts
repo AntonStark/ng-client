@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ChannelService } from '../../channel.service';
@@ -9,7 +9,9 @@ import { InfoType } from '../../info-type.enum';
   templateUrl: './adding-pane.component.html',
   styleUrls: ['./adding-pane.component.css']
 })
-export class AddingPaneComponent {
+export class AddingPaneComponent implements OnInit {
+  mathTypes: string[];
+
   viewState = 'initial';
 
   type: FormGroup;
@@ -27,12 +29,14 @@ export class AddingPaneComponent {
     });
     this.sym = fb.group({
       symName: '',
-      arg1Type: '', // todo добавить кнопку добавления инпутов
+      arg1Type: '',
       retType: ''
     });
     this.axiom = fb.group({
       axiom: ''
     });
+
+    this.mathTypes = [];
   }
 
   back(): void {
@@ -42,27 +46,45 @@ export class AddingPaneComponent {
       this.viewState = 'menu';
   }
 
-  addType(): void {
+  addType(): boolean {
     this.channel.send(InfoType.Text,
       'add_type ' + this.type.get('typeName').value);
     this.viewState = 'initial';
+    return false;
   }
-  addVar(): void {
+  addVar(): boolean {
     this.channel.send(InfoType.Text, 'add_var ' +
       this.variable.get('varName').value + ' ' +
       this.variable.get('typeName').value);
     this.viewState = 'initial';
+    return false;
   }
-  addSym(): void {
+  addSym(): boolean {
     this.channel.send(InfoType.Text, 'add_sym ' +
       this.sym.get('symName').value + ' ' +
       this.sym.get('arg1Type').value + ' ' +
       this.sym.get('retType').value);
     this.viewState = 'initial';
+    return false;
   }
-  addAxiom(): void {
+  addAxiom(): boolean {
     this.channel.send(InfoType.Text, 'add_axiom ' +
       this.axiom.get('axiom').value);
     this.viewState = 'initial';
+    return false;
+  }
+
+  async namesUpdater(nameInfo) {
+    nameInfo = JSON.parse(nameInfo);
+    if (nameInfo.hasOwnProperty('types'))
+      this.mathTypes = nameInfo['types'];
+    if (nameInfo.hasOwnProperty('type'))
+      this.mathTypes.push(nameInfo['type']);
+  }
+
+  ngOnInit() {
+    this.channel
+      .registerHandler(InfoType.MathlangName,
+        this.namesUpdater.bind(this));
   }
 }
