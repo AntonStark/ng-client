@@ -1,4 +1,5 @@
+<app-tabs-box [tabs]="tabs" (change)="onChange($event)"></app-tabs-box>
 <div>
-  <app-formula *ngFor="let fInfo of fInfoStorage" [info]="fInfo"></app-formula>
+  <app-formula *ngFor="let fInfo of currentTab.data" [info]="fInfo"></app-formula>
   <app-adding-pane></app-adding-pane>
 </div>

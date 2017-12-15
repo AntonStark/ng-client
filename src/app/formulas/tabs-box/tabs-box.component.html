@@ -1,0 +1,6 @@
+<div *ngFor="let tabInfo of tabs"
+     [class.selected]="tabInfo === selected"
+     (click)="onSelect(tabInfo)">
+  {{tabInfo._title}}
+  <a>x</a>
+</div>
