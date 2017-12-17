@@ -20,7 +20,6 @@ export class LoginComponent implements OnInit {
 
   serverError = {is: false, mess: ''};
   errorHandler(resp): void {
-    resp = JSON.parse(resp);
     if (resp.hasOwnProperty('login-error'))
       this.serverError = {
         is: true,
@@ -29,7 +28,6 @@ export class LoginComponent implements OnInit {
   }
 
   initRespHandler(resp): void {
-    resp = JSON.parse(resp);
     if (resp.hasOwnProperty('user-name'))
       this.userName = resp['user-name'];
     this.hasAuth = !(this.userName === '' || this.userName === '?');

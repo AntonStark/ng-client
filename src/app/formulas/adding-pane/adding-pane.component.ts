@@ -75,7 +75,6 @@ export class AddingPaneComponent implements OnInit {
   }
 
   async namesUpdater(nameInfo) {
-    nameInfo = JSON.parse(nameInfo);
     if (nameInfo.hasOwnProperty('types'))
       this.mathTypes = nameInfo['types'];
     if (nameInfo.hasOwnProperty('type'))

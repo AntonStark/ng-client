@@ -11,7 +11,7 @@ export function loginFree(channel: ChannelService): AsyncValidatorFn {
   return (login: AbstractControl): Observable<ValidationErrors> => {
     return Observable.timer(300).switchMap(() => {
       return channel.ask(InfoType.Text, 'logIn ' + login.value)
-        .then(answer => (answer.data.pop().mess === '0') )
+        .then(answer => (JSON.stringify(answer.data.pop().mess) === '"0"') )
         .then(valid  => (valid ? null : {'loginBusy': {}}) );
     });
   };
