@@ -23,9 +23,10 @@ export class FormulasComponent implements OnInit {
   }
 
   async infoHandler(mlObject) {
-    mlObject = JSON.parse(mlObject);
     const formulaInfo = new FormulaInfo(mlObject.mlType,
       mlObject.label, mlObject.body, mlObject.premises);
+    if (formulaInfo.label.length === 1 && formulaInfo.label[0] === 0)
+      this.currentTab.data.length = 0;
     this.currentTab.data.push(formulaInfo);
   }
 
