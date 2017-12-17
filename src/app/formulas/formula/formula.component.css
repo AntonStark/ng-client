@@ -1,4 +1,7 @@
-div
-{
+div {
   padding: 5px;
+}
+
+a:hover {
+  border-bottom: solid 1px black;
 }

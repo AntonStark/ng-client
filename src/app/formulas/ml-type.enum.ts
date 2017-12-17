@@ -1,5 +1,5 @@
 export enum MlType {
-  Section = <any>'section',
+  NamedNode = <any>'named_node',
   DefType = <any>'def_type',
   DefVar  = <any>'def_var',
   DefSym  = <any>'def_sym',

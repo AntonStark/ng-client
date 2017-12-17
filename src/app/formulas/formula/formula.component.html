@@ -1,12 +1,17 @@
 <div [ngSwitch]="info.mlType">
+  <div *ngSwitchCase="'named_node'">
+    <a (click)="toSub()">
+      {{info.body}}
+    </a>
+  </div>
   <div *ngSwitchCase="'def_type'">
-    Объявлен тип ${{info.body}}$
+    Объявим тип ${{info.body}}$
   </div>
   <div *ngSwitchCase="'def_sym'">
-    Введено отображение ${{info.body}}$
+    Введём отображение ${{info.body}}$
   </div>
   <div *ngSwitchCase="'def_var'">
-    Переменная ${{info.body}}$
+    Пусть ${{info.body}}$
   </div>
   <div *ngSwitchCase="'axiom'">
     \[
