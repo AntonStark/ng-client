@@ -34,10 +34,18 @@ export class ConsoleComponent implements OnInit {
   takeLastLine(): string {
     return this.canvas.split('\n').slice(-2, -1).pop().slice(1);
   }
+  parseLineToObj(line: string): Object {
+    // todo поддерджка группирующих кавычек " "
+    return line.split(' ');
+  }
   onKeyUp(e): boolean {
     this.canvas = e.target.value;
-    if (e.keyCode === 13)
-      this.channel.send(InfoType.Text, this.takeLastLine());
+    if (e.keyCode === 13) {
+      this.channel.send({
+        type: InfoType.Text,
+        mess: this.parseLineToObj(this.takeLastLine())
+      });
+    }
     return true;
   }
 }

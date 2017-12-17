@@ -27,10 +27,10 @@ export class SignInComponent implements OnInit {
   }
 
   signIn(form): void {
-    this.channel.send(InfoType.Text,
-      'logIn 0 ' +
-      form.value.login + ' ' +
-      form.value.password);
+    this.channel.send({
+      type: InfoType.Text,
+      mess: ['logIn', '0', form.value.login, form.value.password]
+    });
   }
 
   ngOnInit() {

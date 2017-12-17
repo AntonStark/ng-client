@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
       this.initRespHandler.bind(this));
     this.channel.registerHandler(InfoType.Ancillary,
       this.errorHandler.bind(this));
-    this.channel.send(InfoType.Text, 'logIn');
+    this.channel.send({type: InfoType.Text, mess: 'logIn'});
   }
 
   toSignUp() {
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
   }
 
   quit(): void {
-    this.channel.send(InfoType.Text, 'logOut');
+    this.channel.send({type: InfoType.Text, mess: 'logOut'});
   }
 
 }

@@ -47,29 +47,39 @@ export class AddingPaneComponent implements OnInit {
   }
 
   addType(): boolean {
-    this.channel.send(InfoType.Text,
-      'add_type ' + this.type.get('typeName').value);
+    this.channel.send({
+      type: InfoType.Text,
+      mess: ['add_type', this.type.get('typeName').value]
+    });
     this.viewState = 'initial';
     return false;
   }
   addVar(): boolean {
-    this.channel.send(InfoType.Text, 'add_var ' +
-      this.variable.get('varName').value + ' ' +
-      this.variable.get('typeName').value);
+    this.channel.send({
+      type: InfoType.Text,
+      mess: ['add_var',
+        this.variable.get('varName').value,
+        this.variable.get('typeName').value]
+    });
     this.viewState = 'initial';
     return false;
   }
   addSym(): boolean {
-    this.channel.send(InfoType.Text, 'add_sym ' +
-      this.sym.get('symName').value + ' ' +
-      this.sym.get('arg1Type').value + ' ' +
-      this.sym.get('retType').value);
+    this.channel.send({
+      type: InfoType.Text,
+      mess: ['add_sym',
+        this.sym.get('symName').value,
+        this.sym.get('arg1Type').value,
+        this.sym.get('retType').value]
+    });
     this.viewState = 'initial';
     return false;
   }
   addAxiom(): boolean {
-    this.channel.send(InfoType.Text, 'add_axiom ' +
-      this.axiom.get('axiom').value);
+    this.channel.send({
+      type: InfoType.Text,
+      mess: ['add_axiom', this.axiom.get('axiom').value]
+    });
     this.viewState = 'initial';
     return false;
   }

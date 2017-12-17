@@ -40,10 +40,9 @@ export class SignUpComponent implements OnInit {
   }
 
   signUp(form: FormGroup): void {
-    this.channel.send(InfoType.Text,
-      'logIn 1 ' +
-      form.value.login + ' ' +
-      form.value.passwords.password);
+    this.channel.send({
+      type: InfoType.Text,
+      mess: ['logIn', '1', form.value.login, form.value.passwords.password]});
   }
 
   ngOnInit() {

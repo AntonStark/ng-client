@@ -46,17 +46,17 @@ export class ChannelService {
     this.processMeta(dataPacket.meta);
     this.propagate(dataPacket.data);
   }
-  async send(infoType: InfoType, data: any): Promise<void> {
+  async send(data: DataEntry): Promise<void> {
     const meta = {'user-id': this.getUserID()};
-    const req = new DataPacket(meta, [new DataEntry(infoType, data)]);
+    const req = new DataPacket(meta, [data]);
     const response = await this.channel
       .post<DataPacket>(this.url, JSON.stringify(req)).toPromise();
     this.process(response);
   }
 
-  ask(infoType: InfoType, data: any) {
+  ask(data: DataEntry) {
     const meta = {'user-id': this.getUserID()};
-    const req = new DataPacket(meta, [new DataEntry(infoType, data)]);
+    const req = new DataPacket(meta, [data]);
     return this.channel
       .post<DataPacket>(this.url, JSON.stringify(req)).toPromise();
   }
