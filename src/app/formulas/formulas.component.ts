@@ -11,15 +11,11 @@ import { TabInfo } from './tab-info';
   styleUrls: ['./formulas.component.css']
 })
 export class FormulasComponent implements OnInit {
-  tabs: TabInfo[];
   currentTab: TabInfo;
-
-  mock = [new TabInfo('Какая-то лекция'), new TabInfo('И ещё одна')];
 
   displayRendered = false;
   constructor(private channel: ChannelService) {
-    this.tabs = this.mock;          // todo заменить на инициализацию пустой tabInfo
-    this.currentTab = this.tabs[0]; // в общем, tabs всегда должно быть не пусто
+    this.currentTab = new TabInfo('');
   }
 
   async infoHandler(mlObject) {
@@ -34,9 +30,5 @@ export class FormulasComponent implements OnInit {
     this.channel
       .registerHandler(InfoType.MathlangObject,
         this.infoHandler.bind(this));
-  }
-
-  onChange(change) {
-    this.currentTab = change;
   }
 }

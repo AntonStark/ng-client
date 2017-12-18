@@ -14,7 +14,6 @@ import { SignUpComponent } from './login/sign-up/sign-up.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddingPaneComponent } from './formulas/adding-pane/adding-pane.component';
 import { InputMtComponent } from './formulas/input-mt/input-mt.component';
-import { TabsBoxComponent } from './formulas/tabs-box/tabs-box.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +26,6 @@ import { TabsBoxComponent } from './formulas/tabs-box/tabs-box.component';
     SignUpComponent,
     AddingPaneComponent,
     InputMtComponent,
-    TabsBoxComponent,
   ],
   imports: [
     BrowserModule,
