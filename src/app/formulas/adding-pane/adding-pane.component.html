@@ -1,5 +1,5 @@
 <div class="pane" *ngIf="viewState === 'initial'">
-  <a (click)="viewState = 'menu'">&#x2B;</a>
+  <a (click)="openMenu()">&#x2B;</a>
 </div>
 <div class="pane" *ngIf="viewState !== 'initial'" [ngSwitch]="viewState">
   <a (click)="back()"
@@ -23,9 +23,7 @@
     Ввести переменную
     <input type="text" formControlName="varName" placeholder="имя переменной">
     типа
-    <select formControlName="typeName">
-      <option *ngFor="let t of mathTypes" [ngValue]="t">{{t}}</option>
-    </select>
+    <app-input-mt [group]="variable" [controlName]="'typeName'" [types]="mathTypes"></app-input-mt>
     <a (click)="addVar()" [class.dis]="!variable.valid">&#x2B;</a>
     <button (click)="addVar()" type="submit" style="display:none">hidden submit</button>
   </form>
@@ -34,9 +32,17 @@
     Ввести отображение
     <input type="text" formControlName="symName" placeholder="обозначение">
     &#58;
-    <input type="text" formControlName="arg1Type" placeholder="тип">
+    <app-input-mt [group]="sym" [controlName]="'arg1Type'"
+                  [types]="mathTypes"></app-input-mt>
+    &#215;
+    <app-input-mt [group]="sym" [controlName]="'arg2Type'"
+                  [types]="mathTypes"></app-input-mt>
+    &#215;
+    <app-input-mt [group]="sym" [controlName]="'arg3Type'"
+                  [types]="mathTypes"></app-input-mt>
     &#10230;
-    <input type="text" formControlName="retType" placeholder="тип">
+    <app-input-mt [group]="sym" [controlName]="'retType'"
+                  [types]="mathTypes"></app-input-mt>
     <a (click)="addSym()" [class.dis]="!sym.valid">&#x2B;</a>
     <button (click)="addSym()" type="submit" style="display:none">hidden submit</button>
   </form>

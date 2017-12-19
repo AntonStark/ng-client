@@ -1,3 +1,6 @@
-<select [value]="type">
-  <option *ngFor="let t of types" [ngValue]="t" >{{t}}</option>
-</select>
+<div [formGroup]="group">
+  <select [formControlName]="controlName">
+    <option [ngValue]=""></option>
+    <option *ngFor="let t of types" [ngValue]="t">{{t}}</option>
+  </select>
+</div>

@@ -20,23 +20,30 @@ export class AddingPaneComponent implements OnInit {
   axiom: FormGroup;
 
   constructor(private fb: FormBuilder, private channel: ChannelService) {
+    this.mathTypes = [];
+
     this.type = fb.group({
       typeName: ['', Validators.required]
     });
     this.variable = fb.group({
-      varName: '',
-      typeName: ''
+      varName:  ['', Validators.required],
+      typeName: ['', Validators.required],
     });
     this.sym = fb.group({
-      symName: '',
+      symName: ['', Validators.required],
       arg1Type: '',
-      retType: ''
+      arg2Type: '',
+      arg3Type: '',
+      retType: ['', Validators.required],
     });
     this.axiom = fb.group({
-      axiom: ''
+      axiom: ['', Validators.required],
     });
+  }
 
-    this.mathTypes = [];
+  openMenu(): void {
+    this.viewState = 'menu';
+    this.channel.send({type: InfoType.Text, mess: ['view_types', '0']});
   }
 
   back(): void {
@@ -65,13 +72,14 @@ export class AddingPaneComponent implements OnInit {
     return false;
   }
   addSym(): boolean {
-    this.channel.send({
-      type: InfoType.Text,
-      mess: ['add_sym',
-        this.sym.get('symName').value,
-        this.sym.get('arg1Type').value,
-        this.sym.get('retType').value]
-    });
+    const mess = ['add_sym', this.sym.get('symName').value];
+    for (const i of [1, 2, 3]) {
+      const arg: String = this.sym.get('arg' + i + 'Type').value;
+      if (arg.length !== 0)
+        mess.push(arg);
+    }
+    mess.push(this.sym.get('retType').value);
+    this.channel.send({type: InfoType.Text, mess: mess});
     this.viewState = 'initial';
     return false;
   }
