@@ -5,13 +5,13 @@
     </a>
   </div>
   <div *ngSwitchCase="'def_type'">
-    Объявим тип ${{info.body}}$
+    ({{info.label}}) Объявим тип ${{info.body}}$
   </div>
   <div *ngSwitchCase="'def_sym'">
-    Введём отображение ${{info.body}}$
+    ({{info.label}}) Введём отображение ${{info.body}}$
   </div>
   <div *ngSwitchCase="'def_var'">
-    Пусть ${{info.body}}$
+    ({{info.label}}) Пусть ${{info.body}}$
   </div>
   <div *ngSwitchCase="'axiom'">
     \[
