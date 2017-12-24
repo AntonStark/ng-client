@@ -30,5 +30,10 @@ export class FormulasComponent implements OnInit {
     this.channel
       .registerHandler(InfoType.MathlangObject,
         this.infoHandler.bind(this));
+    // todo Синхронизация первичных запрсоов
+    /*this.channel.send({
+      type: InfoType.Text,
+      mess: ['plugIn', 'math']
+    });*/
   }
 }

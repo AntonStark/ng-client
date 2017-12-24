@@ -1,6 +1,6 @@
 import { MlType } from './ml-type.enum';
 
-type Path = number[];
+export type Path = number[];
 export class FormulaInfo {
   mlType: MlType;
   label: Path;

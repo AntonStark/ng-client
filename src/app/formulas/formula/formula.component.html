@@ -19,6 +19,20 @@
     \tag{{'{'+info.label+'}'}}
     \]
   </div>
+  <div *ngSwitchCase="'inf_mp'">
+    \[
+    \text{{"{Из " + pathToStr(info.premises[0]) +
+           " по " + pathToStr(info.premises[1]) +
+           " следует: }"}} {{info.body}}
+    \]
+  </div>
+  <div *ngSwitchCase="'inf_spec'">
+    \[
+    \text{{"{Из "  + pathToStr(info.premises[0]) +
+           " для " + pathToStr(info.premises[1]) +
+           " получаем: }"}} {{info.body}}
+    \]
+  </div>
   <div *ngSwitchDefault>
     {{info.body}}
   </div>
