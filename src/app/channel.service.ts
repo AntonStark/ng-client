@@ -11,7 +11,8 @@ type Handler = (infoData: any) => void;
 
 @Injectable()
 export class ChannelService {
-  private url = 'http://phoenix.spotlife.ru/spikard/';
+  // private url = 'http://phoenix.spotlife.ru/spikard/';
+  private url = 'http://localhost/spikard/';
   private views: Map<InfoType, Handler[]>;
   constructor(private channel: HttpClient) {
     this.views = new Map<InfoType, Handler[]>();

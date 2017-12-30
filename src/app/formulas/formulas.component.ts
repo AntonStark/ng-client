@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
 import { ChannelService } from '../channel.service';
-import { FormulaInfo } from './formula-info';
 import { InfoType } from '../info-type.enum';
 import { TabInfo } from './tab-info';
 
@@ -19,11 +18,9 @@ export class FormulasComponent implements OnInit {
   }
 
   async infoHandler(mlObject) {
-    const formulaInfo = new FormulaInfo(mlObject.mlType,
-      mlObject.label, mlObject.body, mlObject.premises);
-    if (formulaInfo.label.length === 1 && formulaInfo.label[0] === 0)
+    if (mlObject.label.length === 1 && mlObject.label[0] === 0)
       this.currentTab.data.length = 0;
-    this.currentTab.data.push(formulaInfo);
+    this.currentTab.data.push(mlObject);
   }
 
   ngOnInit() {

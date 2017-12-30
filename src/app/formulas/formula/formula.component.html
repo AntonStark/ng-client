@@ -30,8 +30,8 @@
   <div *ngSwitchCase="'inf_spec'">
     \[
     \text{{"{Из "  + pathToStr(info.premises[0]) +
-           " для " + pathToStr(info.premises[1]) +
-           " получаем: }"}} {{info.body}}
+           " для $" + info.case +
+           "$ получаем: }"}} {{info.body}}
     \tag{{'{'+info.label+'}'}}
     \]
   </div>

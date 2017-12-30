@@ -1,5 +1,4 @@
 import { AfterViewInit, Component, Input } from '@angular/core';
-import { FormulaInfo, Path } from '../formula-info';
 import { ChannelService } from '../../channel.service';
 import { InfoType } from '../../info-type.enum';
 
@@ -11,7 +10,7 @@ declare const MathJax: any;
   styleUrls: ['./formula.component.css']
 })
 export class FormulaComponent implements AfterViewInit {
-  @Input() info: FormulaInfo;
+  @Input() info;
   constructor(private channel: ChannelService) { }
 
   ngAfterViewInit() {
@@ -28,7 +27,7 @@ export class FormulaComponent implements AfterViewInit {
       });
   }
 
-  pathToStr(path: Path): String {
+  pathToStr(path: number[]): String {
     let buf = '(';
     if (path.length === 0)
       return '()';
