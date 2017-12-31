@@ -13,9 +13,9 @@ a.dis {
   pointer-events: none;
 }
 
-input[type="text"] {
+input[type="text"]:not(.term-input) {
   width: 75px;
 }
-#axiom {
-  width: 600px;
+.term-input {
+  width: 500px;
 }

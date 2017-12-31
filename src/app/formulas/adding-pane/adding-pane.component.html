@@ -49,7 +49,7 @@
 
   <form *ngSwitchCase="'axiom'" [formGroup]="axiom" (ngSubmit)="addAxiom()">
     Пусть
-    <input type="text" formControlName="axiom" placeholder="аксиома" id="axiom">
+    <input type="text" formControlName="axiom" placeholder="аксиома" class="term-input">
     <a (click)="addAxiom()" [class.dis]="!axiom.valid">&#x2B;</a>
     <button (click)="addAxiom()" type="submit" style="display:none">hidden submit</button>
   </form>
