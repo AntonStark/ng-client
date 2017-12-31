@@ -1,0 +1,40 @@
+<div class="pane" *ngIf="viewState === 'initial'">
+  <a (click)="openMenu()">&#x279d;</a>
+</div>
+<div class="pane" *ngIf="viewState !== 'initial'" [ngSwitch]="viewState">
+  <a (click)="back()"
+     style="color: darkgray">&#9675;</a>
+
+  <div *ngSwitchCase="'menu'">
+    <button (click)="viewState='mp'">MP</button>
+    <button (click)="viewState='spec'">Spec</button>
+    <button (click)="viewState='gen'">Gen</button>
+  </div>
+
+  <form *ngSwitchCase="'mp'" [formGroup]="mp" (ngSubmit)="deduceMP()">
+    Предпосылка:
+    <input type="text" formControlName="premise" placeholder="нумерация">
+    импликация:
+    <input type="text" formControlName="impl" placeholder="нумерация">
+    <a (click)="deduceMP()" [class.dis]="!mp.valid">&#x279d;</a>
+    <button (click)="deduceMP()" type="submit" style="display:none">hidden submit</button>
+  </form>
+
+  <form *ngSwitchCase="'spec'" [formGroup]="spec" (ngSubmit)="deduceSpec()">
+    Общее утверждение:
+    <input type="text" formControlName="general" placeholder="нумерация">
+    для случая:
+    <input type="text" formControlName="case" placeholder="терм">
+    <a (click)="deduceSpec()" [class.dis]="!spec.valid">&#x279d;</a>
+    <button (click)="deduceSpec()" type="submit" style="display:none">hidden submit</button>
+  </form>
+
+  <form *ngSwitchCase="'gen'" [formGroup]="gen" (ngSubmit)="deduceGen()">
+    Обобщить утверждение:
+    <input type="text" formControlName="case" placeholder="нумерация">
+    по переменной:
+    <input type="text" formControlName="var" placeholder="нумерация">
+    <a (click)="deduceGen()" [class.dis]="!gen.valid">&#x279d;</a>
+    <button (click)="deduceGen()" type="submit" style="display:none">hidden submit</button>
+  </form>
+</div>

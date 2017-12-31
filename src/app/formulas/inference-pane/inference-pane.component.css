@@ -1,0 +1,21 @@
+.pane * {
+  display: inline-block;
+}
+
+a {
+  font-size: xx-large;
+  vertical-align: sub;
+  margin-right: 6px;
+}
+
+a.dis {
+  color: darkgray;
+  pointer-events: none;
+}
+
+input[type="text"] {
+  width: 75px;
+}
+#axiom {
+  width: 600px;
+}

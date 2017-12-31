@@ -14,6 +14,7 @@ import { SignUpComponent } from './login/sign-up/sign-up.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AddingPaneComponent } from './formulas/adding-pane/adding-pane.component';
 import { InputMtComponent } from './formulas/input-mt/input-mt.component';
+import { InferencePaneComponent } from './formulas/inference-pane/inference-pane.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { InputMtComponent } from './formulas/input-mt/input-mt.component';
     SignUpComponent,
     AddingPaneComponent,
     InputMtComponent,
+    InferencePaneComponent,
   ],
   imports: [
     BrowserModule,
