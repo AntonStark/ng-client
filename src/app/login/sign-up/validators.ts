@@ -6,6 +6,7 @@ import 'rxjs/add/operator/switchMap';
 
 import { ChannelService } from '../../channel.service';
 import { InfoType } from '../../info-type.enum';
+import { DataEntry } from '../../data-entry';
 
 export function loginFree(channel: ChannelService): AsyncValidatorFn {
   return (login: AbstractControl): Observable<ValidationErrors> => {
@@ -13,8 +14,11 @@ export function loginFree(channel: ChannelService): AsyncValidatorFn {
       return channel.ask({
         type: InfoType.Text,
         mess: ['logIn', login.value]
-      }).then(answer => (JSON.stringify(answer.data.pop().mess) === '"0"') )
-        .then(valid  => (valid ? null : {'loginBusy': {}}) );
+      }, function (req: DataEntry[]) {
+        const valid = (req.pop().mess === '"0"');
+        return (valid ? null : {'loginBusy': {}});
+      }
+      );
     });
   };
 }

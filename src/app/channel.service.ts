@@ -11,11 +11,26 @@ type Handler = (infoData: any) => void;
 
 @Injectable()
 export class ChannelService {
+  meta = {'user-id': this.getUserID()};
   // private url = 'http://phoenix.spotlife.ru/spikard/';
-  private url = 'http://localhost/spikard/';
-  private views: Map<InfoType, Handler[]>;
+  url = 'http://localhost/spikard/';
+
+  channelReady = false;
+  queue;
+  views = new Map<InfoType, Handler[]>();
+
   constructor(private channel: HttpClient) {
-    this.views = new Map<InfoType, Handler[]>();
+    this.queue = [];
+
+    const initReq = new DataPacket(this.meta, [
+      new DataEntry(InfoType.Text, ['getInterface'])
+    ]);
+    channel.post<DataPacket>(this.url, JSON.stringify(initReq))
+      .subscribe(ans => {
+        this.processMeta(ans.meta);
+        this.channelReady = true;
+        this.releaseEntries();
+      });
   }
 
   registerHandler(infoType: InfoType,
@@ -42,23 +57,30 @@ export class ChannelService {
     if (!isUndefined(meta['user-id']))
       if (meta['user-id'] !== this.getUserID())
         CookieService.set('user-id', meta['user-id']);
-  }
-  process(dataPacket: DataPacket): void {
-    this.processMeta(dataPacket.meta);
-    this.propagate(dataPacket.data);
-  }
-  async send(data: DataEntry): Promise<void> {
-    const meta = {'user-id': this.getUserID()};
-    const req = new DataPacket(meta, [data]);
-    const response = await this.channel
-      .post<DataPacket>(this.url, JSON.stringify(req)).toPromise();
-    this.process(response);
+    this.meta = {'user-id': this.getUserID()};
   }
 
-  ask(data: DataEntry) {
-    const meta = {'user-id': this.getUserID()};
-    const req = new DataPacket(meta, [data]);
-    return this.channel
-      .post<DataPacket>(this.url, JSON.stringify(req)).toPromise();
+  private call(data: DataEntry, callback) {
+    if (this.channelReady) {
+      const req = new DataPacket(this.meta, [data]);
+      return this.channel
+        .post<DataPacket>(this.url, JSON.stringify(req))
+        .toPromise().then(resp => callback(resp.data));
+    }
+    else
+      this.queue.push({data, callback});
+  }
+
+  releaseEntries(): void {
+    for (const entry of this.queue) {
+      this.call(entry.data, entry.callback);
+    }
+  }
+
+  send(data: DataEntry) {
+    this.call(data, this.propagate.bind(this));
+  }
+  ask(data: DataEntry, callback) {
+    return this.call(data, callback);
   }
 }

@@ -13,9 +13,9 @@
   <div *ngSwitchCase="'def_var'">
     ({{info.label}}) Пусть ${{info.body}}$
   </div>
-  <div *ngSwitchCase="'axiom'">
+  <div *ngSwitchCase="'term'">
     \[
-    \text{{"{Пусть }"}} {{info.body}}
+    {{info.body}}
     \tag{{'{'+info.label+'}'}}
     \]
   </div>
@@ -30,8 +30,8 @@
   <div *ngSwitchCase="'inf_spec'">
     \[
     \text{{"{Из "  + pathToStr(info.premises[0]) +
-           " для $" + info.case +
-           "$ получаем: }"}} {{info.body}}
+           " для " + pathToStr(info.premises[1]) +
+           " получаем: }"}} {{info.body}}
     \tag{{'{'+info.label+'}'}}
     \]
   </div>
