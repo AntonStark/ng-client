@@ -4,6 +4,8 @@ import { ChannelService } from '../channel.service';
 import { InfoType } from '../info-type.enum';
 import { TabInfo } from './tab-info';
 
+declare const MathJax: any;
+
 @Component({
   selector: 'app-formulas',
   templateUrl: './formulas.component.html',
@@ -12,7 +14,6 @@ import { TabInfo } from './tab-info';
 export class FormulasComponent implements OnInit {
   currentTab: TabInfo;
 
-  displayRendered = false;
   constructor(private channel: ChannelService) {
     this.currentTab = new TabInfo('');
   }
@@ -24,13 +25,19 @@ export class FormulasComponent implements OnInit {
   }
 
   ngOnInit() {
+    MathJax.Hub.Config({
+      tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]},
+      showMathMenu: false,
+      elements: ['tex'],
+      SVG: {styles: {'.MathJax_SVG_Display': {margin: 0}}}
+    });
+
     this.channel
       .registerHandler(InfoType.MathlangObject,
         this.infoHandler.bind(this));
-    // todo Синхронизация первичных запрсоов
-    /*this.channel.send({
+    this.channel.send({
       type: InfoType.Text,
       mess: ['plugIn', 'math']
-    });*/
+    });
   }
 }

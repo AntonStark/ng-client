@@ -19,7 +19,7 @@
     \tag{{'{'+info.label+'}'}}
     \]
   </div>
-  <div *ngSwitchCase="'inf_mp'">
+  <div *ngSwitchCase="'InfMP'">
     \[
     \text{{"{Из " + pathToStr(info.premises[0]) +
            " по " + pathToStr(info.premises[1]) +
@@ -27,11 +27,27 @@
     \tag{{'{'+info.label+'}'}}
     \]
   </div>
-  <div *ngSwitchCase="'inf_spec'">
+  <div *ngSwitchCase="'InfSpec'">
     \[
     \text{{"{Из "  + pathToStr(info.premises[0]) +
            " для " + pathToStr(info.premises[1]) +
            " получаем: }"}} {{info.body}}
+    \tag{{'{'+info.label+'}'}}
+    \]
+  </div>
+  <div *ngSwitchCase="'InfAppl'">
+    \[
+    \text{{"{Применив к "  + pathToStr(info.premises[0]) +
+    " теорему " + pathToStr(info.premises[1]) +
+    " получаем: }"}} {{info.body}}
+    \tag{{'{'+info.label+'}'}}
+    \]
+  </div>
+  <div *ngSwitchCase="'InfEql'">
+    \[
+    \text{{"{Применив к "  + pathToStr(info.premises[0]) +
+    " равенство " + pathToStr(info.premises[1]) +
+    " получаем: }"}} {{info.body}}
     \tag{{'{'+info.label+'}'}}
     \]
   </div>
