@@ -11,6 +11,7 @@ declare const MathJax: any;
 })
 export class FormulaComponent implements AfterViewInit {
   @Input() info;
+  @Input() selected: boolean;
   constructor(private channel: ChannelService) { }
 
   ngAfterViewInit() {

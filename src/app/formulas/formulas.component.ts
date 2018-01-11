@@ -13,6 +13,7 @@ declare const MathJax: any;
 })
 export class FormulasComponent implements OnInit {
   currentTab: TabInfo;
+  selectedFormula;
 
   constructor(private channel: ChannelService) {
     this.currentTab = new TabInfo('');
@@ -29,7 +30,11 @@ export class FormulasComponent implements OnInit {
       tex2jax: {inlineMath: [['$', '$'], ['\\(', '\\)']]},
       showMathMenu: false,
       elements: ['tex'],
-      SVG: {styles: {'.MathJax_SVG_Display': {margin: 0}}}
+      SVG: {styles: {'.MathJax_SVG_Display': {margin: 0}}},
+      CommonHTML: {styles: {
+        '.mjx-chtml': {outline: 'none'},
+        '.MJXc-display': {margin: 0}
+      }}
     });
 
     this.channel
