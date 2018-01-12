@@ -43,6 +43,10 @@ export class AddingPaneComponent implements OnInit {
 
   defaultLayout(): void { this.viewState = 'menu'; }
 
+  refreshTypes() {
+    this.channel.send({type: InfoType.Text, mess: ['view_types', '0']});
+  }
+
   addType(): boolean {
     this.channel.send({
       type: InfoType.Text,

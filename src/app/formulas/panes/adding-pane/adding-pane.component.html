@@ -4,8 +4,8 @@
 
   <div *ngSwitchCase="'menu'">
     <button (click)="viewState='type'">тип</button>
-    <button (click)="viewState='variable'">переменную</button>
-    <button (click)="viewState='sym'">отображение</button>
+    <button (click)="refreshTypes(); viewState='variable'">переменную</button>
+    <button (click)="refreshTypes(); viewState='sym'">отображение</button>
     <button (click)="viewState='axiom'">терм</button>
   </div>
 

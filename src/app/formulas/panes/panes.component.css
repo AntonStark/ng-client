@@ -1,8 +1,11 @@
+.pane {
+  margin: 8px 0;
+}
 .pane * {
   display: inline-block;
 }
 
-a.sym{
+a.sym {
   font-size: xx-large;
   vertical-align: sub;
   margin: -10px 0;
@@ -18,8 +21,4 @@ input[type="text"]:not(.term-input) {
 }
 .term-input {
   width: 500px;
-}
-
-p {
-  margin: 8px 0;
 }

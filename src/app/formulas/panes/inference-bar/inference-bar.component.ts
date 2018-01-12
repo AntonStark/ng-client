@@ -6,10 +6,10 @@ import { InfoType } from '../../../info-type.enum';
 
 @Component({
   selector: 'app-inference-pane',
-  templateUrl: './inference.component.html',
+  templateUrl: './inference-bar.component.html',
   styleUrls: ['../panes.component.css']
 })
-export class InferenceComponent {
+export class InferenceBarComponent {
   viewState = 'menu';
 
   mp: FormGroup;
