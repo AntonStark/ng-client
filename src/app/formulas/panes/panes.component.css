@@ -2,10 +2,10 @@
   display: inline-block;
 }
 
-a {
+a.sym{
   font-size: xx-large;
   vertical-align: sub;
-  margin-right: 6px;
+  margin: -10px 0;
 }
 
 a.dis {

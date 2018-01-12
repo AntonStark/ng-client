@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm, FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { ChannelService } from '../../channel.service';
-import { InfoType } from '../../info-type.enum';
+import { ChannelService } from '../../../channel.service';
+import { InfoType } from '../../../info-type.enum';
 
 @Component({
   selector: 'app-adding-pane',
   templateUrl: './adding-pane.component.html',
-  styleUrls: ['./adding-pane.component.css']
+  styleUrls: ['../panes.component.css']
 })
 export class AddingPaneComponent implements OnInit {
   mathTypes: string[];
 
-  viewState = 'initial';
+  viewState = 'menu';
 
   type: FormGroup;
   variable: FormGroup;
@@ -41,24 +41,14 @@ export class AddingPaneComponent implements OnInit {
     });
   }
 
-  openMenu(): void {
-    this.viewState = 'menu';
-    this.channel.send({type: InfoType.Text, mess: ['view_types', '0']});
-  }
-
-  back(): void {
-    if (this.viewState === 'menu')
-      this.viewState = 'initial';
-    else
-      this.viewState = 'menu';
-  }
+  defaultLayout(): void { this.viewState = 'menu'; }
 
   addType(): boolean {
     this.channel.send({
       type: InfoType.Text,
       mess: ['add_type', this.type.get('typeName').value]
     });
-    this.viewState = 'initial';
+    this.defaultLayout();
     return false;
   }
   addVar(): boolean {
@@ -68,7 +58,7 @@ export class AddingPaneComponent implements OnInit {
         this.variable.get('varName').value,
         this.variable.get('typeName').value]
     });
-    this.viewState = 'initial';
+    this.defaultLayout();
     return false;
   }
   addSym(): boolean {
@@ -80,7 +70,7 @@ export class AddingPaneComponent implements OnInit {
     }
     mess.push(this.sym.get('retType').value);
     this.channel.send({type: InfoType.Text, mess: mess});
-    this.viewState = 'initial';
+    this.defaultLayout();
     return false;
   }
   addAxiom(): boolean {
@@ -88,7 +78,7 @@ export class AddingPaneComponent implements OnInit {
       type: InfoType.Text,
       mess: ['add_axiom', this.axiom.get('axiom').value]
     });
-    this.viewState = 'initial';
+    this.defaultLayout();
     return false;
   }
 

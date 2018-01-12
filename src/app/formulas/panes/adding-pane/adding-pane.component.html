@@ -1,9 +1,6 @@
-<div class="pane" *ngIf="viewState === 'initial'">
-  <a (click)="openMenu()">&#x2B;</a>
-</div>
-<div class="pane" *ngIf="viewState !== 'initial'" [ngSwitch]="viewState">
-  <a (click)="back()"
-     style="color: darkgray">&#9675;</a>
+<div class="pane" [ngSwitch]="viewState">
+  <a (click)="defaultLayout()"
+     style="text-decoration: underline">Новый</a>
 
   <div *ngSwitchCase="'menu'">
     <button (click)="viewState='type'">тип</button>
@@ -13,23 +10,23 @@
   </div>
 
   <form *ngSwitchCase="'type'" [formGroup]="type" (ngSubmit)="addType()">
-    Объявить тип
+     тип
     <input type="text" formControlName="typeName" placeholder="имя типа">
-    <a (click)="addType()" [class.dis]="!type.valid">&#x2B;</a>
+    <a (click)="addType()" class="sym" [class.dis]="!type.valid">&#x2B;</a>
     <button (click)="addType()" type="submit" style="display:none">hidden submit</button>
   </form>
 
   <form *ngSwitchCase="'variable'" [formGroup]="variable" (ngSubmit)="addVar()">
-    Ввести переменную
+     переменную
     <input type="text" formControlName="varName" placeholder="имя переменной">
     типа
     <app-input-mt [group]="variable" [controlName]="'typeName'" [types]="mathTypes"></app-input-mt>
-    <a (click)="addVar()" [class.dis]="!variable.valid">&#x2B;</a>
+    <a (click)="addVar()" class="sym" [class.dis]="!variable.valid">&#x2B;</a>
     <button (click)="addVar()" type="submit" style="display:none">hidden submit</button>
   </form>
 
   <form *ngSwitchCase="'sym'" [formGroup]="sym" (ngSubmit)="addSym()">
-    Ввести отображение
+     отображение
     <input type="text" formControlName="symName" placeholder="обозначение">
     &#58;
     <app-input-mt [group]="sym" [controlName]="'arg1Type'"
@@ -43,14 +40,14 @@
     &#10230;
     <app-input-mt [group]="sym" [controlName]="'retType'"
                   [types]="mathTypes"></app-input-mt>
-    <a (click)="addSym()" [class.dis]="!sym.valid">&#x2B;</a>
+    <a (click)="addSym()" class="sym" [class.dis]="!sym.valid">&#x2B;</a>
     <button (click)="addSym()" type="submit" style="display:none">hidden submit</button>
   </form>
 
   <form *ngSwitchCase="'axiom'" [formGroup]="axiom" (ngSubmit)="addAxiom()">
-    Пусть
+     терм
     <input type="text" formControlName="axiom" placeholder="аксиома" class="term-input">
-    <a (click)="addAxiom()" [class.dis]="!axiom.valid">&#x2B;</a>
+    <a (click)="addAxiom()" class="sym" [class.dis]="!axiom.valid">&#x2B;</a>
     <button (click)="addAxiom()" type="submit" style="display:none">hidden submit</button>
   </form>
 </div>

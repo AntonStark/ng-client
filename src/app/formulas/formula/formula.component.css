@@ -6,7 +6,7 @@ a:hover {
   border-bottom: solid 1px black;
 }
 
-#selected {
+.selected {
   margin: 1em 0;
   border: solid 1px black;
 }

@@ -1,4 +1,4 @@
-<div [ngSwitch]="info.mlType" [id]="(selected ? 'selected' : '')">
+<div [ngSwitch]="info.mlType" [class]="(selected ? 'selected' : '')">
   <div *ngSwitchCase="'named_node'">
     <a (click)="toSub()">
       {{info.body}}

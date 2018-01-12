@@ -1,16 +1,16 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { ChannelService } from '../../channel.service';
-import { InfoType } from '../../info-type.enum';
+import { ChannelService } from '../../../channel.service';
+import { InfoType } from '../../../info-type.enum';
 
 @Component({
   selector: 'app-inference-pane',
   templateUrl: './inference-pane.component.html',
-  styleUrls: ['./inference-pane.component.css']
+  styleUrls: ['../panes.component.css']
 })
 export class InferencePaneComponent {
-  viewState = 'initial';
+  viewState = 'menu';
 
   mp: FormGroup;
   spec: FormGroup;
@@ -41,16 +41,7 @@ export class InferencePaneComponent {
     });
   }
 
-  openMenu(): void {
-    this.viewState = 'menu';
-  }
-
-  back(): void {
-    if (this.viewState === 'menu')
-      this.viewState = 'initial';
-    else
-      this.viewState = 'menu';
-  }
+  defaultLayout(): void { this.viewState = 'menu'; }
 
   deduceMP(): boolean {
     this.channel.send({
@@ -59,7 +50,7 @@ export class InferencePaneComponent {
         this.mp.get('premise').value,
         this.mp.get('impl').value]
     });
-    this.viewState = 'initial';
+    this.defaultLayout();
     return false;
   }
 
@@ -70,7 +61,7 @@ export class InferencePaneComponent {
         this.spec.get('general').value,
         this.spec.get('case').value]
     });
-    this.viewState = 'initial';
+    this.defaultLayout();
     return false;
   }
 
@@ -81,7 +72,7 @@ export class InferencePaneComponent {
         this.appl.get('term').value,
         this.appl.get('theorem').value]
     });
-    this.viewState = 'initial';
+    this.defaultLayout();
     return false;
   }
 
@@ -92,7 +83,7 @@ export class InferencePaneComponent {
         this.eql.get('term').value,
         this.eql.get('eql').value]
     });
-    this.viewState = 'initial';
+    this.defaultLayout();
     return false;
   }
 
@@ -103,7 +94,7 @@ export class InferencePaneComponent {
         this.gen.get('case').value,
         this.gen.get('var').value]
     });
-    this.viewState = 'initial';
+    this.defaultLayout();
     return false;
   }
 }

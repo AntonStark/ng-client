@@ -1,9 +1,6 @@
-<div class="pane" *ngIf="viewState === 'initial'">
-  <a (click)="openMenu()">&#x279d;</a>
-</div>
-<div class="pane" *ngIf="viewState !== 'initial'" [ngSwitch]="viewState">
-  <a (click)="back()"
-     style="color: darkgray">&#9675;</a>
+<div class="pane" [ngSwitch]="viewState">
+  <a (click)="defaultLayout()"
+     style="text-decoration: underline">Следование</a>
 
   <div *ngSwitchCase="'menu'">
     <button (click)="viewState='mp'">MP</button>
@@ -18,7 +15,7 @@
     <input type="text" formControlName="premise" placeholder="нумерация">
     импликация:
     <input type="text" formControlName="impl" placeholder="нумерация">
-    <a (click)="deduceMP()" [class.dis]="!mp.valid">&#x279d;</a>
+    <a (click)="deduceMP()" class="sym" [class.dis]="!mp.valid">&#x279d;</a>
     <button (click)="deduceMP()" type="submit" style="display:none">hidden submit</button>
   </form>
 
@@ -27,7 +24,7 @@
     <input type="text" formControlName="general" placeholder="нумерация">
     для случая:
     <input type="text" formControlName="case" placeholder="терм" class="term-input">
-    <a (click)="deduceSpec()" [class.dis]="!spec.valid">&#x279d;</a>
+    <a (click)="deduceSpec()" class="sym" [class.dis]="!spec.valid">&#x279d;</a>
     <button (click)="deduceSpec()" type="submit" style="display:none">hidden submit</button>
   </form>
 
@@ -36,7 +33,7 @@
     <input type="text" formControlName="theorem" placeholder="нумерация">
     к терму:
     <input type="text" formControlName="term" placeholder="нумерация">
-    <a (click)="deduceApply()" [class.dis]="!appl.valid">&#x279d;</a>
+    <a (click)="deduceApply()" class="sym" [class.dis]="!appl.valid">&#x279d;</a>
     <button (click)="deduceApply()" type="submit" style="display:none">hidden submit</button>
   </form>
 
@@ -45,7 +42,7 @@
     <input type="text" formControlName="eql" placeholder="нумерация">
     к терму:
     <input type="text" formControlName="term" placeholder="нумерация">
-    <a (click)="deduceEqual()" [class.dis]="!eql.valid">&#x279d;</a>
+    <a (click)="deduceEqual()" class="sym" [class.dis]="!eql.valid">&#x279d;</a>
     <button (click)="deduceEqual()" type="submit" style="display:none">hidden submit</button>
   </form>
 
@@ -54,7 +51,7 @@
     <input type="text" formControlName="case" placeholder="нумерация">
     по переменной:
     <input type="text" formControlName="var" placeholder="нумерация">
-    <a (click)="deduceGen()" [class.dis]="!gen.valid">&#x279d;</a>
+    <a (click)="deduceGen()" class="sym" [class.dis]="!gen.valid">&#x279d;</a>
     <button (click)="deduceGen()" type="submit" style="display:none">hidden submit</button>
   </form>
 </div>

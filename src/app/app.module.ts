@@ -12,9 +12,10 @@ import { LoginComponent } from './login/login.component';
 import { SignInComponent } from './login/sign-in/sign-in.component';
 import { SignUpComponent } from './login/sign-up/sign-up.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AddingPaneComponent } from './formulas/adding-pane/adding-pane.component';
+import { AddingPaneComponent } from './formulas/panes/adding-pane/adding-pane.component';
 import { InputMtComponent } from './formulas/input-mt/input-mt.component';
-import { InferencePaneComponent } from './formulas/inference-pane/inference-pane.component';
+import { InferencePaneComponent } from './formulas/panes/inference-pane/inference-pane.component';
+import { PanesComponent } from './formulas/panes/panes.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { InferencePaneComponent } from './formulas/inference-pane/inference-pane
     AddingPaneComponent,
     InputMtComponent,
     InferencePaneComponent,
+    PanesComponent,
   ],
   imports: [
     BrowserModule,
