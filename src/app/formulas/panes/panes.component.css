@@ -19,3 +19,7 @@ input[type="text"]:not(.term-input) {
 .term-input {
   width: 500px;
 }
+
+p {
+  margin: 8px 0;
+}

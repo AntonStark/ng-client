@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { InferencePaneComponent } from './inference-pane.component';
+import { InferenceComponent } from './inference.component';
 
-describe('InferencePaneComponent', () => {
-  let component: InferencePaneComponent;
-  let fixture: ComponentFixture<InferencePaneComponent>;
+describe('InferenceComponent', () => {
+  let component: InferenceComponent;
+  let fixture: ComponentFixture<InferenceComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ InferencePaneComponent ]
+      declarations: [ InferenceComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(InferencePaneComponent);
+    fixture = TestBed.createComponent(InferenceComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

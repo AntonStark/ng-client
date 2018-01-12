@@ -1,12 +1,12 @@
 <div class="pane" [ngSwitch]="viewState">
   <a (click)="defaultLayout()"
-     style="text-decoration: underline">Новый</a>
+     style="text-decoration: underline">Введём</a>
 
   <div *ngSwitchCase="'menu'">
     <button (click)="viewState='type'">тип</button>
-    <button (click)="viewState='variable'">переменная</button>
+    <button (click)="viewState='variable'">переменную</button>
     <button (click)="viewState='sym'">отображение</button>
-    <button (click)="viewState='axiom'">аксиома</button>
+    <button (click)="viewState='axiom'">терм</button>
   </div>
 
   <form *ngSwitchCase="'type'" [formGroup]="type" (ngSubmit)="addType()">
