@@ -1,4 +1,5 @@
 <div>
+  <app-load-save-bar></app-load-save-bar>
   <app-formula *ngFor="let fInfo of currentTab.data"
                [info]="fInfo" [selected]="fInfo === selectedFormula"
                (click)="selectedFormula = fInfo"></app-formula>

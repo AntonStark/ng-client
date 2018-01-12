@@ -15,6 +15,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { AddingPaneComponent } from './formulas/panes/adding-pane/adding-pane.component';
 import { InputMtComponent } from './formulas/input-mt/input-mt.component';
 import { InferenceBarComponent } from './formulas/panes/inference-bar/inference-bar.component';
+import { LoadSaveBarComponent } from './formulas/panes/load-save-bar/load-save-bar.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { InferenceBarComponent } from './formulas/panes/inference-bar/inference-
     AddingPaneComponent,
     InputMtComponent,
     InferenceBarComponent,
+    LoadSaveBarComponent,
   ],
   imports: [
     BrowserModule,

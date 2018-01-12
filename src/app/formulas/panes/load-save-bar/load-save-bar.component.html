@@ -1,0 +1,9 @@
+<div class="pane">
+  <button (click)="toggleIndex()">{{(displayIndex ? 'назад' : 'открыть')}}</button>
+  Load'n'Save ;)
+</div>
+<div *ngIf="displayIndex">
+  Доступные работы:
+  <div *ngFor="let work of works"
+       (click)="open(work)" style="text-decoration: underline">{{work}}</div>
+</div>
