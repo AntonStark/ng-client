@@ -1,6 +1,8 @@
 <div class="pane">
   <button (click)="toggleIndex()">{{(displayIndex ? 'назад' : 'открыть')}}</button>
-  Load'n'Save ;)
+  <button (click)="saveChanges()" style="margin: 0 3em">сохранить</button>
+  <input type="text" placeholder="название" [(value)]="title">
+  <button (click)="saveAs()">сохранить как</button>
 </div>
 <div *ngIf="displayIndex">
   Доступные работы:

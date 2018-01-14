@@ -12,23 +12,36 @@ import { InfoType } from '../../../info-type.enum';
 export class LoadSaveBarComponent {
   works = [];
   displayIndex = false;
+  title = '';
 
   constructor(private channel: ChannelService) {}
 
   toggleIndex() {
     this.displayIndex = !this.displayIndex;
     if (this.displayIndex)
-      this.channel.ask({mess: ['view_index'], type: InfoType.Text},
-        function (answer: DataEntry[]) {
-          for (const a of answer)
-            this.works.push(a.mess);
-        }.bind(this));
+      this.channel
+        .ask({mess: ['view_index'], type: InfoType.Text},
+          function (answer: DataEntry[]) {
+            for (const a of answer)
+              this.works.push(a.mess);
+          }.bind(this));
     else
       this.works.length = 0;
   }
 
+  saveChanges() {
+    this.channel
+      .send({mess: 'save_changes', type: InfoType.Text});
+  }
+
+  saveAs() {
+    this.channel
+      .send({mess: ['save_as', this.title], type: InfoType.Text});
+  }
+
   open(work: string) {
-    this.channel.send({mess: ['load', work], type: InfoType.Text});
+    this.channel
+      .send({mess: ['load', work], type: InfoType.Text});
     this.toggleIndex();
   }
 }
