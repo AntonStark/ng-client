@@ -14,6 +14,7 @@ declare const MathJax: any;
 export class FormulasComponent implements OnInit {
   currentTab: TabInfo;
   selectedFormula;
+  primaryNode = false;
 
   constructor(private channel: ChannelService) {
     this.currentTab = new TabInfo('');
@@ -23,6 +24,7 @@ export class FormulasComponent implements OnInit {
     if (mlObject.label.length === 1 && mlObject.label[0] === 0)
       this.currentTab.data.length = 0;
     this.currentTab.data.push(mlObject);
+    this.primaryNode = this.currentTab.data[0]['is_primary_node'];
   }
 
   ngOnInit() {
@@ -43,6 +45,10 @@ export class FormulasComponent implements OnInit {
     this.channel.send({
       type: InfoType.Text,
       mess: ['plugIn', 'math']
+    });
+    this.channel.send({
+      type: InfoType.Text,
+      mess: ['view_work']
     });
   }
 }

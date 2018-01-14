@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { ChannelService } from '../../../channel.service';
@@ -11,13 +11,15 @@ import { InfoType } from '../../../info-type.enum';
 })
 export class AddingPaneComponent implements OnInit {
   mathTypes: string[];
+  @Input() primaryNode: boolean;
 
   viewState = 'menu';
-
   type: FormGroup;
   variable: FormGroup;
   sym: FormGroup;
   axiom: FormGroup;
+
+  branch: FormGroup;
 
   constructor(private fb: FormBuilder, private channel: ChannelService) {
     this.mathTypes = [];
@@ -38,6 +40,10 @@ export class AddingPaneComponent implements OnInit {
     });
     this.axiom = fb.group({
       axiom: ['', Validators.required],
+    });
+    this.branch = fb.group({
+      nodeType: ['', Validators.required],
+      title: '',
     });
   }
 
@@ -83,6 +89,28 @@ export class AddingPaneComponent implements OnInit {
       mess: ['add_axiom', this.axiom.get('axiom').value]
     });
     this.defaultLayout();
+    return false;
+  }
+
+  startNode() {
+    const type = this.branch.get('nodeType').value;
+    let cmd = '';
+    switch (type) {
+      case 'курс' :
+        cmd = 'start_course'; break;
+      case 'раздел' :
+        cmd = 'start_section'; break;
+      case 'лекцию' :
+        cmd = 'start_lecture'; break;
+    }
+    const title = this.branch.get('title').value;
+    let cmdArgs;
+    if (title !== null && title.length > 0)
+      cmdArgs = [cmd, title];
+    else
+      cmdArgs = [cmd];
+    this.channel.send({type: InfoType.Text, mess: cmdArgs});
+    this.branch.reset();
     return false;
   }
 

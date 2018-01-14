@@ -1,4 +1,4 @@
-<div class="pane" [ngSwitch]="viewState">
+<div class="pane" *ngIf="primaryNode" [ngSwitch]="viewState">
   <a (click)="defaultLayout()"
      style="text-decoration: underline">Введём</a>
 
@@ -49,5 +49,18 @@
     <input type="text" formControlName="axiom" placeholder="аксиома" class="term-input">
     <a (click)="addAxiom()" class="sym" [class.dis]="!axiom.valid">&#x2B;</a>
     <button (click)="addAxiom()" type="submit" style="display:none">hidden submit</button>
+  </form>
+</div>
+<div class="pane" *ngIf="!primaryNode">
+  Начать
+  <form [formGroup]="branch">
+    <select formControlName="nodeType">
+      <option>курс</option>
+      <option>раздел</option>
+      <option>лекцию</option>
+      <option>замыкание</option>
+    </select>
+    <input type="text" formControlName="title" placeholder="название">
+    <button (click)="startNode()" type="submit" [disabled]="!branch.valid">ОК</button>
   </form>
 </div>

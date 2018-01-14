@@ -1,7 +1,8 @@
-import { ChannelService } from '../../../channel.service';
 import { Component } from '@angular/core';
-import { InfoType } from '../../../info-type.enum';
+
+import { ChannelService } from '../../../channel.service';
 import { DataEntry } from '../../../data-entry';
+import { InfoType } from '../../../info-type.enum';
 
 @Component({
   selector: 'app-load-save-bar',
