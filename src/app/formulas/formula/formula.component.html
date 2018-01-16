@@ -1,8 +1,7 @@
-<div [ngSwitch]="info.mlType" [class]="(selected ? 'selected' : '')">
+<div [ngSwitch]="info.mlType" [class.selected]="_selected"
+     [class.unselected]="_unselected">
   <div *ngSwitchCase="'named_node'">
-    <a (click)="toSub()">
-      {{info.body}}
-    </a>
+    <a (click)="toSub()">{{info.body}}</a>
   </div>
   <div *ngSwitchCase="'def_type'">
     ({{info.label}}) Объявим тип ${{info.body}}$
@@ -12,48 +11,37 @@
   </div>
   <div *ngSwitchCase="'def_var'">
     ({{info.label}}) Пусть ${{info.body}}$
+    <app-inference-pane *ngIf="_selected"></app-inference-pane>
   </div>
   <div *ngSwitchCase="'term'">
     \[
     {{info.body}}
     \tag{{'{'+info.label+'}'}}
     \]
+    <app-inference-pane *ngIf="_selected"></app-inference-pane>
   </div>
-  <div *ngSwitchCase="'InfMP'">
+  <div *ngSwitchCase="'inference'">
+    <!--<app-formula *ngIf="_selected" [selected]="false"
+                 [info]="asRef(formulasStorage.getByLabel(info.premises[0]))">
+    </app-formula>
+    <app-formula *ngIf="_selected" [selected]="false"
+                 [info]="asRef(formulasStorage.getByLabel(info.premises[1]))">
+    </app-formula>-->
+    <div *ngIf="_selected" style="color: gray;">
+      ({{formulasStorage.getByLabel(info.premises[0]).label}}):
+      ${{formulasStorage.getByLabel(info.premises[0]).body}}$
+    </div>
+    <div *ngIf="_selected" style="color: gray;">
+      ({{formulasStorage.getByLabel(info.premises[1]).label}}):
+      ${{formulasStorage.getByLabel(info.premises[1]).body}}$
+    </div>
     \[
-    \text{{"{Из " + pathToStr(info.premises[0]) +
-           " по " + pathToStr(info.premises[1]) +
-           " следует: }"}} {{info.body}}
+    \text{{inferenceMess()}} {{info.body}}
     \tag{{'{'+info.label+'}'}}
     \]
-  </div>
-  <div *ngSwitchCase="'InfSpec'">
-    \[
-    \text{{"{Из "  + pathToStr(info.premises[0]) +
-           " для " + pathToStr(info.premises[1]) +
-           " получаем: }"}} {{info.body}}
-    \tag{{'{'+info.label+'}'}}
-    \]
-  </div>
-  <div *ngSwitchCase="'InfAppl'">
-    \[
-    \text{{"{Применив к "  + pathToStr(info.premises[0]) +
-    " теорему " + pathToStr(info.premises[1]) +
-    " получаем: }"}} {{info.body}}
-    \tag{{'{'+info.label+'}'}}
-    \]
-  </div>
-  <div *ngSwitchCase="'InfEql'">
-    \[
-    \text{{"{Применив к "  + pathToStr(info.premises[0]) +
-    " равенство " + pathToStr(info.premises[1]) +
-    " получаем: }"}} {{info.body}}
-    \tag{{'{'+info.label+'}'}}
-    \]
+    <app-inference-pane *ngIf="_selected"></app-inference-pane>
   </div>
   <div *ngSwitchDefault>
     {{info.body}}
   </div>
-  
-  <app-inference-pane *ngIf="selected"></app-inference-pane>
 </div>

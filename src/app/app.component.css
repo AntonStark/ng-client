@@ -18,13 +18,13 @@ div
 
 #tex
 {
-  bottom: 25%;
+  bottom: 15%;
   border-bottom: solid 1px black;
   overflow-y: scroll;
 }
 
 #console
 {
-  top: 75%;
+  top: 85%;
   border-top: solid 1px black;
 }

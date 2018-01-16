@@ -7,7 +7,7 @@ import { InfoType } from '../../../info-type.enum';
 @Component({
   selector: 'app-load-save-bar',
   templateUrl: './load-save-bar.component.html',
-  styleUrls: ['../panes.component.css', './load-save-bar.component.css']
+  styleUrls: ['../panes.component.css']
 })
 export class LoadSaveBarComponent {
   works = [];
