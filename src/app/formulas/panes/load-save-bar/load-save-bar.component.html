@@ -1,7 +1,7 @@
 <div class="pane">
   <button (click)="toggleIndex()">{{(displayIndex ? 'назад' : 'открыть')}}</button>
   <button (click)="saveChanges()" style="margin: 0 3em">сохранить</button>
-  <input type="text" placeholder="название" [(value)]="title">
+  <input type="text" placeholder="название" (input)="title = $event.target.value">
   <button (click)="saveAs()">сохранить как</button>
 </div>
 <div *ngIf="displayIndex">
